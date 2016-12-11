@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="js/jquery-easyui-1.4.5/themes/default/easyui.css"></link>
+<link rel="stylesheet" href="js/jquery-easyui-1.4.5/themes/icon.css"></link>
+<script type="text/javascript">
+   $(function(){
+	   $('#btn').click(function(){
+		   $.ajax({
+	            type:'post',  //请求方式
+	            url:'userservlet?method=insert',   //提交地址
+	            datatype:'json',         //服务器返回时接收的数据类型 
+	            data:$('#myform').serialize(),  /* 向后台发送的数据，有两种方式，1拼接的形式，2对象,这里用了jQuery的序列化表单的方法
+	                                                var formdata={username:"$('#name').val()",password:"$(#passw).val()",sex:"$(#sex).val()}
+	                                                data:formdata*/
+	               
+	            success:function(result)  //result:返回的数据
+	            {
+	            	var result=$.parseJSON(result);
+	            	alert(result.status);
+	                
+	            },
+	            error:function(result)
+	            {
+	                
+	                var result=$.parseJSON(result);
+	                alert(result.status);
+	                //alert("失败");
+	            }
+	            
+	        });
+		   
+	   });
+	   
+	   
+	   
+   });
+</script>
+</head>
+<body>
+   <div id=" "  class="easyui-panel" title="用户" style="width:300px;height:350px;padding:10px;">
+	   <form id="myform" action=" ",method="post">
+	        <table>
+	             <tr>
+	                 <td>用户名:</td>
+	                <!--  <td><input type="text" id="name" name="username" value="" class="easyui-validatebox" data-options="required:true,validType:'email'" ></td> -->
+	                 <td><input type="text" id="name" name="username" value="" class="easyui-validatebox" required="true"  ></td>
+	             </tr>
+	              <tr>
+	                 <td>密码:</td>
+	                 <td><input type="password" id="passw" name="password" value="" class="easyui-validatebox"></td>
+	             </tr>
+	              <tr>
+	                 <td>性别:</td>
+	                 <td>
+	                                            男<input type="radio" id="" checked="checked" name="sex" value="男" class="easyui-validatebox">
+	                                            女<input type="radio" id="" name="sex" value="女"  class="easyui-validatebox">
+	                 </td>
+	             </tr>
+	              <tr>
+	                 <td>年龄:</td>
+	                 <td><input type="text" id="age" name="age" value="" class="easyui-validatebox"></td>
+	             </tr>
+	             <tr>
+                      <td>出生日期:</td>
+                      <td><input id="birthday" type="text" name="birthday" value="" /></td>
+                 </tr>
+	             <tr>
+	                   <td>所属城市:</td>
+	                   <td><input id="city" type="text" name="city"  value=""  class="easyui-validatebox"/></td>
+	             </tr>
+	                <tr>
+	                    <td>薪水:</td>
+	                    <td><input id="salary" type="text" name="salary" value="" class="easyui-validatebox"/></td>
+	                </tr>
+	                <tr>
+	                    <td>开始时间:</td>
+	                    <td><input id="startTime"  type="text" name="startTime"  value="" class="easyui-datebox" /></td>
+	                </tr>
+	                <tr>
+	                    <td>结束时间:</td>
+	                    <td><input id="endTime" type="text" name="endTime"  value="" class="easyui-validatebox"/></td>
+	                </tr>   
+	                <tr>
+	                    <td>个人描述:</td>
+	                    <td><input id="description" type="text" name="description"  value="" class="easyui-validatebox"/></td>
+	                </tr> 
+	                <tr>
+	                    <!-- <td><input type="button" name="submit" value="提交"></td> -->
+	                    <td><a id="btn" class="easyui-linkbutton">保存</a></td>
+	                </tr>
+	        </table>
+	        
+	    
+	    </form>
+   </div>
+	
+
+</body>
+</html>
